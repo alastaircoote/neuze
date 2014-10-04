@@ -1,0 +1,308 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>Neuze</title>
+       <!--<link href='http://fonts.googleapis.com/css?family=Lobster+Two:700italic|Cabin+Condensed' rel='stylesheet' type='text/css'>-->
+   
+        <link rel='stylesheet' href='styles.css' type='text/css'/>
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <script src="http://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+        <script>
+          WebFont.load({
+            google: {
+              families: ['Lobster Two:700italic', 'Cabin Condensed','Raleway']
+            }
+          });
+</script>
+        </head>
+        <body>
+            <div id='back'></div>
+            <div id='back-bw'></div>
+            <div id='back-color'></div>
+            <div id='content'>
+                <div class='block'>
+                    <div class='inner'>
+                        <h2>News. Distilled.</h2>
+                        <p>Everything you need to know. Packaged up and delivered direct, each morning.</p>
+                        <p>Now that's Neuze.</p>
+
+                        <div class='quote'>
+                            <div class='quote-text'>&ldquo;It's like Uber for news   &rdquo;</div>
+                            <img src='images/tc-techcrunch.svg' height='40'/>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class='block'>
+                    <div class='inner'>
+                        <h3>Your personal information concierge.</h3>
+                        <p>You're a busy person. You don't have time to keep track of everything that's going on in the world &mdash; so take a step back and let us do it for you.</p>
+                        <p>Our information specialists are stationed across the globe, feeding us the information we need to present you with your daily digest &mdash; only the most important stories, in depth, and all in one place.</p>
+                    </div>
+                </div>
+                <!--<div class='block'>
+                    <div class='inner'>
+                        <h3>No signal? No problem.</h3>
+                        <p>Does your commute take you underground? Not a problem for Neuze. By the time you wake up, every article and every crisp, high resolution photo will already be there and waiting for you offline.</p>
+                    </div>
+                </div>-->
+                <div class='block'>
+                    <div class='inner uiblock'>
+                        <h3>A unique design and user interface</h3>
+                        <p>We've used over one hundred years of design thinking to create our news consumption interface. A perfect fusion of information and material, we call it...</p>
+                    </div>
+                </div>
+                <div class='block'>
+                    <div class='inner uiblock'>
+                        
+                        <div id='newspaper'>
+                            <div class='left half'>
+                                <div class='inner'>
+                                    <div class='line'></div>
+                                    <div class='circle'></div>
+                                    <div class='text'>NEWS</div>
+                                </div>
+                            </div><div class='right half'>
+                                <div class='inner'>
+                                    <div class='circle'></div>
+                                    <div class='line'></div>
+                                    <div class='text'>PAPER</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='block'>
+                    <div class='inner'>
+                    </div>
+                </div>
+                <div class='block'>
+                    <div class='inner'>
+                    </div>
+                </div>
+                <div class='block'>
+                    <div class='inner'>
+                    </div>
+                </div>
+                <div class='block'>
+                    <div class='inner'>
+                    </div>
+                </div>
+                <div class='block'>
+                    <div class='inner'>
+                    </div>
+                </div>
+                <div class='block'>
+                    <div class='inner'>
+                        <h3>Beautiful, flexible and offline capable.</h3>
+                        <p>Bend it, fold it, hold it however you like. And no matter whether your commute takes you underground or through a signal deadzone, you'll be able to read every story and see every crisp, high resolution photo. </p>
+                    </div>
+                </div>
+                <div class='block'>
+                    <div class='inner'>
+                        <h3>Take your time. Then move on.</h3>
+                        <p>You're not on the timer here &mdash; no battery limits, no download delays. And when you're done, just throw
+                        your briefing into one of the hundreds of receptacles located around the city. Tomorrow morning our delivery specialists will have a new briefing waiting for you.</p>
+                    </div>
+                </div>
+                
+            </div>
+            <script src='http://code.jquery.com/jquery-1.11.1.min.js'></script>
+            <script src='chromath.js'></script>
+            <script>
+                var blocks = $('.block > .inner');
+                var $bwBack = $('#back-bw');
+                var $colorBack = $('#back-color')
+                var $newspaper = $('#newspaper');
+
+                var $left = $('#newspaper .left .inner');
+                var $right = $('#newspaper .right .inner');
+
+                var $circles = $('#newspaper .circle');
+                var $texts = $('#newspaper .text')
+
+                var $leftText = $('#newspaper .left .text');
+                var $rightText = $('#newspaper .right .text')
+                       
+
+                blocks.each(function(i,el) {
+                    var $el = $(el)
+                    $el.css('margin-top',$el.height() / -2)
+                });
+
+                var colors = [
+                    'red',
+                    'blue',
+                    'blue',
+                    'blue',
+
+                    'green',
+                    'yellow'
+                ];
+
+
+                $(window).on('scroll', function() {
+                   
+                    var windowHeight = $('.block').first().height();
+                    var top = $(window).scrollTop()// + (windowHeight / 4);
+                    //if (top < 0) top = 0;
+                    var along = top/windowHeight + 1;
+                    var index = Math.floor(along);
+                    var toNext = along - index;
+                    console.log(index,toNext)
+                    if (index == 1) {
+                        $bwBack.css('opacity', toNext)
+                    } else if (index > 1) {
+                        $bwBack.css('opacity', 1)
+                    } else if (index == 0) {
+                        $bwBack.css('opacity', 0)
+                    }
+
+                    if (index == 2) {
+                        $colorBack.css('opacity',toNext * 0.3);
+                    } else if (index < 2) {
+                        $colorBack.css('opacity',0);
+                    }  else if (index > 2) {
+                        $colorBack.css('opacity',0.3);
+                    }
+
+                    if (index > 2) {
+                        var fromColor = colors[index-3];
+                        var toColor = colors[index-2];
+                        if (toColor) {
+                            var col = Chromath.towards(fromColor, toColor, toNext).toString();
+                            $colorBack.css('background-color', col);
+                        }
+                    } else if (index < 5) {
+                        $colorBack.css('background-color', '');
+                    }
+
+                    var scrLength = 4;
+                    var start = 4;
+
+                    if (index >= start && index <= start + scrLength) {
+                        $newspaper.addClass('fixed');
+                        $newspaper.css('margin-top','');
+                    } else if (index < start) {
+                        $newspaper.removeClass('fixed');
+                        $newspaper.css('margin-top','');
+                    } else if (index > start + scrLength) {
+                        $newspaper.removeClass('fixed');
+                        $newspaper.css('margin-top',(windowHeight * (scrLength)) + (windowHeight* 0.75))
+                    }
+
+                    if (index >= start-1 && index <= start-1 + scrLength ) {
+                        
+
+                        var innerIndex = (start - ((index - 2) + toNext)) / start;
+                        if (innerIndex < 0) innerIndex = 0;
+                        
+
+                        $left.css({
+                            'left': (-70 * innerIndex) + '%',
+                            'opacity': 1 - (0.6 * innerIndex)
+                        });
+                        $right.css({
+                            'right': (-70 * innerIndex) + '%',
+                            'opacity': 1 - (0.6 * innerIndex)
+                        });
+
+                        var scale = ((1 - innerIndex) / 2) + 0.5
+
+                        $left.parent().css('transform','scale(' + scale + ',' + scale + ')')
+                        $right.parent().css('transform','scale(' + scale + ',' + scale + ')')
+
+                        /*var textOpacity = 0;
+                        if (innerIndex < 0.5) {
+                            textOpacity = (1 - (innerIndex + 0.5)) * 2;
+
+                        }
+                        $('.text',$left).css('opacity', textOpacity)
+                        $('.text',$right).css('opacity', textOpacity)
+                        */
+                    } else if (index < start) {
+                        var scale = 0.5;
+                        $left.parent().css('transform','scale(' + scale + ',' + scale + ')')
+                        $right.parent().css('transform','scale(' + scale + ',' + scale + ')')
+
+                        $left.css({
+                            'left': '-70%',
+                            'opacity': 0.6
+                        });
+                        $right.css({
+                            'right': '-70%',
+                            'opacity': 0.6
+                        });
+                    } else {
+                        var scale = 1;
+                        $left.parent().css('transform','scale(' + scale + ',' + scale + ')')
+                        $right.parent().css('transform','scale(' + scale + ',' + scale + ')')
+
+                        $left.css({
+                            'left': '0',
+                            'opacity': 1
+                        });
+                        $right.css({
+                            'right': '0',
+                            'opacity': 1
+                        });
+                    }
+
+                    if (index == start + scrLength - 2) {
+                        $circles.css({
+                            'border-radius': 125 * (1 -toNext),
+                            'width': 200 + (50 * (1-toNext))
+                        })
+                        
+                    } else if (index < start + scrLength - 2) {
+                        $circles.css({
+                            'border-radius': 125,
+                            'width': 250
+                        })
+                       
+                    } else {
+                       $circles.css({
+                            'border-radius':0,
+                            'width': 200 
+                        })
+                    }
+
+                    if (index == start + scrLength - 1) {
+                        $leftText.css({
+                            'opacity': toNext,
+                            'right': 100 - (100 * toNext)
+                        })
+
+                        $rightText.css({
+                            'opacity': toNext,
+                            'left': 100 - (100 * toNext)
+                        })
+                    } else if (index < start + scrLength - 1) {
+                        $leftText.css({
+                            'opacity': 0,
+                            'right': 100
+                        })
+
+                        $rightText.css({
+                            'opacity': 0,
+                            'right': 100
+                        })
+                    } else {
+                         $leftText.css({
+                            'opacity':1,
+                            'right': 0
+                        })
+
+                        $rightText.css({
+                            'opacity': 1,
+                            'right': 0
+                        })
+                    }
+                });
+
+
+                $(window).trigger('scroll');
+
+            </script>
+        </body>
+</html>
