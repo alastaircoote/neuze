@@ -27,7 +27,7 @@
                         <p>Now that's Neuze.</p>
 
                         <div class='quote'>
-                            <div class='quote-text'>&ldquo;It's like Uber for news   &rdquo;</div>
+                            <div class='quote-text'>&ldquo;It's like Uber for news&rdquo;</div>
                             <img src='images/tc-techcrunch.svg' height='40'/>
                             
                         </div>
@@ -40,12 +40,12 @@
                         <p>Our information specialists are stationed across the globe, feeding us the information we need to present you with your daily digest &mdash; only the most important stories, in depth, and all in one place.</p>
                     </div>
                 </div>
-                <!--<div class='block'>
+                <div class='block'>
                     <div class='inner'>
-                        <h3>No signal? No problem.</h3>
-                        <p>Does your commute take you underground? Not a problem for Neuze. By the time you wake up, every article and every crisp, high resolution photo will already be there and waiting for you offline.</p>
+                        <h3>Let us cut out the noise for you.</h3>
+                        <p>Our dedicated staff of writers and editors fact-check every story to ensure that you're not led astray by false information. Then we pair our stories with powerful photography, giving you a perspective no-one else can rival.</p>
                     </div>
-                </div>-->
+                </div>
                 <div class='block'>
                     <div class='inner uiblock'>
                         <h3>A unique design and user interface</h3>
@@ -95,17 +95,28 @@
                 <div class='block'>
                     <div class='inner'>
                         <h3>Beautiful, flexible and offline capable.</h3>
-                        <p>Bend it, fold it, hold it however you like. And no matter whether your commute takes you underground or through a signal deadzone, you'll be able to read every story and see every crisp, high resolution photo. </p>
+                        <p>Bend it, fold it, hold it however you like. And no matter whether your commute takes you underground or through a signal deadzone, you'll be able to read every story and see every photo in crisp high resolution. </p>
                     </div>
                 </div>
                 <div class='block'>
                     <div class='inner'>
                         <h3>Take your time. Then move on.</h3>
                         <p>You're not on the timer here &mdash; no battery limits, no download delays. And when you're done, just throw
-                        your briefing into one of the hundreds of receptacles located around the city. Tomorrow morning our delivery specialists will have a new briefing waiting for you.</p>
+                        your briefing into one of the hundreds of receptacles located around the city.</p><p> Tomorrow morning our delivery specialists will ensure a brand new briefing is waiting for you when you wake up.</p>
                     </div>
                 </div>
-                
+                <div class='block'>
+                    <div class='inner'>
+                        <h3>Join us on our amazing journey.</h3>
+                        <p>
+                        <button>Subscribe Now</button>
+                        </p>
+                        <p>
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-size="large">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</p>
+                    </div>
+                </div>
             </div>
             <script src='http://code.jquery.com/jquery-1.11.1.min.js'></script>
             <script src='chromath.js'></script>
@@ -135,9 +146,13 @@
                     'blue',
                     'blue',
                     'blue',
-
+                    'blue',
                     'green',
-                    'yellow'
+                    'yellow',
+                    'yellow',
+                    'brown',
+                    'red',
+                    'purple'
                 ];
 
 
@@ -149,7 +164,6 @@
                     var along = top/windowHeight + 1;
                     var index = Math.floor(along);
                     var toNext = along - index;
-                    console.log(index,toNext)
                     if (index == 1) {
                         $bwBack.css('opacity', toNext)
                     } else if (index > 1) {
@@ -178,7 +192,7 @@
                     }
 
                     var scrLength = 4;
-                    var start = 4;
+                    var start = 5;
 
                     if (index >= start && index <= start + scrLength) {
                         $newspaper.addClass('fixed');
@@ -302,6 +316,46 @@
 
 
                 $(window).trigger('scroll');
+
+                var parsed = [];
+                $.get('./newspapers.csv', function(all) {
+                    var rows = all.split('\n');
+                    var keys = rows[0].split(',');
+
+                    for (x = 1; x < rows.length; x++) {
+                        var obj = {}
+                        var split = rows[x].split(',')
+
+                        for (var y = 0;y < split.length;y++) {
+                            obj[keys[y]] = split[y]
+                        }
+
+                        parsed.push(obj)
+                    }
+
+
+
+
+                });
+
+
+                $('button').on('click', function(e) {
+                    e.preventDefault();
+                    var num = 0;
+                    var interval = setInterval(function() {
+                        num++;
+                        var i = Math.floor(Math.random() * (parsed.length ));
+                        $('button').html(parsed[i].name)
+
+                        if (num == 20) {
+                            clearInterval(interval);
+                            setTimeout(function() {
+                                window.location = parsed[i].url
+                            },500)
+                        }
+                    },100)
+                })
+
 
             </script>
         </body>
