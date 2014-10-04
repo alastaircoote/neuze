@@ -226,6 +226,10 @@ button {
     #newspaper .text {
         font-size: 40px;
     }
+
+    button {
+        width: 80%;
+    }
 }
 }
 
