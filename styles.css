@@ -194,6 +194,20 @@ button {
     cursor:pointer;
 }
 
+
+div.photo {
+    text-align: center;
+    font-size: 12px;
+    font-family: sans-serif;
+    width:100%;
+    padding-bottom:10px;
+}
+
+div.photo a {
+    color:#fff;
+    text-decoration: none;
+}
+
 @media only screen and (max-width : 450px) {
     .block {
         height: 100vh;
@@ -232,4 +246,3 @@ button {
     }
 }
 }
-
